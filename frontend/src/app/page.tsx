@@ -221,8 +221,6 @@ export default function Home() {
     setFilters(emptyFilters);
   };
 
-  // Opens the Intelligence Panel for the machine selected.
-  // The incident with the highest downtime is selected.
   const handleMachineClick = (machineId: string) => {
     const machineIncidents = filteredIncidents
       .filter((incident) => incident.machine_id === machineId)
@@ -267,16 +265,16 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-[#070d18] p-4 text-white md:p-8">
-      <div className="mx-auto max-w-7xl">
+    <main className="min-h-screen w-full min-w-0 overflow-x-hidden bg-[#070d18] p-4 text-white md:p-8">
+      <div className="mx-auto w-full min-w-0 max-w-7xl">
         {/* Dashboard Header */}
-        <header className="mb-8 flex flex-wrap items-start justify-between gap-4">
-          <div>
+        <header className="mb-8 flex min-w-0 flex-wrap items-start justify-between gap-4">
+          <div className="min-w-0">
             <p className="mb-2 text-xs font-semibold uppercase tracking-[0.3em] text-cyan-400">
               Infocreon Internship · PoC 21
             </p>
 
-            <h1 className="text-3xl font-bold md:text-4xl">
+            <h1 className="break-words text-3xl font-bold md:text-4xl">
               Downtime Root Cause Explorer
             </h1>
 
@@ -293,7 +291,7 @@ export default function Home() {
             type="button"
             onClick={() => setShowMetadata(true)}
             aria-label="Open project information"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-600 text-lg font-semibold text-cyan-300 transition hover:border-cyan-400 hover:bg-cyan-400/10"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-slate-600 text-lg font-semibold text-cyan-300 transition hover:border-cyan-400 hover:bg-cyan-400/10"
           >
             i
           </button>
@@ -407,7 +405,7 @@ export default function Home() {
         ) : (
           <>
             {/* Filters */}
-            <section className="mb-8 rounded-xl border border-slate-800 bg-slate-900 p-5">
+            <section className="mb-8 min-w-0 rounded-xl border border-slate-800 bg-slate-900 p-5">
               <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                 <div>
                   <h2 className="text-lg font-semibold">
@@ -426,7 +424,7 @@ export default function Home() {
                 </button>
               </div>
 
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+              <div className="grid min-w-0 gap-3 sm:grid-cols-2 lg:grid-cols-5">
                 {(
                   [
                     ["machine_id", "Machine"],
@@ -436,14 +434,14 @@ export default function Home() {
                     ["status", "Status"],
                   ] as const
                 ).map(([key, label]) => (
-                  <label key={key} className="text-sm text-slate-300">
+                  <label key={key} className="min-w-0 text-sm text-slate-300">
                     {label}
                     <select
                       value={filters[key]}
                       onChange={(event) =>
                         updateFilter(key, event.target.value)
                       }
-                      className="mt-2 w-full rounded-lg border border-slate-700 bg-slate-950 p-3 text-white"
+                      className="mt-2 w-full min-w-0 rounded-lg border border-slate-700 bg-slate-950 p-3 text-white"
                     >
                       <option value="">All</option>
                       {filterOptions[key].map((value) => (
@@ -478,7 +476,7 @@ export default function Home() {
             </section>
 
             {/* KPI Cards */}
-            <section className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <section className="mb-8 grid min-w-0 gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {[
                 ["Total Incidents", totalIncidents, "incidents"],
                 ["Total Downtime", totalDowntime, "minutes"],
@@ -495,7 +493,7 @@ export default function Home() {
               ].map(([label, value, unit]) => (
                 <div
                   key={String(label)}
-                  className="rounded-xl border border-slate-800 bg-slate-900 p-5"
+                  className="min-w-0 rounded-xl border border-slate-800 bg-slate-900 p-5"
                 >
                   <p className="text-sm text-slate-400">{label}</p>
                   <p className="mt-3 text-3xl font-bold text-cyan-300">
@@ -514,8 +512,8 @@ export default function Home() {
             ) : (
               <>
                 {/* Pareto and Machine Downtime */}
-                <section className="mb-8 grid gap-6 lg:grid-cols-2">
-                  <div className="rounded-xl border border-slate-800 bg-slate-900 p-5">
+                <section className="mb-8 grid min-w-0 gap-6 lg:grid-cols-2">
+                  <div className="min-w-0 rounded-xl border border-slate-800 bg-slate-900 p-5">
                     <h2 className="mb-2 text-lg font-semibold">
                       Downtime Pareto Analysis
                     </h2>
@@ -526,7 +524,7 @@ export default function Home() {
                   </div>
 
                   {/* Clickable Machine Downtime */}
-                  <div className="rounded-xl border border-slate-800 bg-slate-900 p-5">
+                  <div className="min-w-0 rounded-xl border border-slate-800 bg-slate-900 p-5">
                     <h2 className="mb-2 text-lg font-semibold">
                       Downtime by Machine
                     </h2>
@@ -577,7 +575,7 @@ export default function Home() {
                 </section>
 
                 {/* Scatter Chart */}
-                <section className="mb-8 rounded-xl border border-slate-800 bg-slate-900 p-5">
+                <section className="mb-8 min-w-0 rounded-xl border border-slate-800 bg-slate-900 p-5">
                   <h2 className="mb-2 text-lg font-semibold">
                     Failure Frequency vs Downtime Duration
                   </h2>
@@ -588,7 +586,7 @@ export default function Home() {
                 </section>
 
                 {/* Root Cause Tree */}
-                <section className="mb-8 rounded-xl border border-slate-800 bg-slate-900 p-5">
+                <section className="mb-8 min-w-0 rounded-xl border border-slate-800 bg-slate-900 p-5">
                   <h2 className="mb-2 text-lg font-semibold">
                     Root Cause Tree
                   </h2>
@@ -599,7 +597,7 @@ export default function Home() {
                 </section>
 
                 {/* Machine Shift Heatmap */}
-                <section className="mb-8 rounded-xl border border-slate-800 bg-slate-900 p-5">
+                <section className="mb-8 min-w-0 rounded-xl border border-slate-800 bg-slate-900 p-5">
                   <h2 className="mb-2 text-lg font-semibold">
                     Machine / Shift Downtime Heatmap
                   </h2>
@@ -607,7 +605,7 @@ export default function Home() {
                     Downtime minutes by machine and shift.
                   </p>
 
-                  <div className="overflow-x-auto">
+                  <div className="w-full min-w-0 max-w-full overflow-x-auto">
                     <table className="w-full min-w-[500px] text-left text-sm">
                       <thead>
                         <tr className="border-b border-slate-700 text-slate-400">
@@ -646,7 +644,7 @@ export default function Home() {
             )}
 
             {/* Incident Investigation */}
-            <section className="mb-8 rounded-xl border border-slate-800 bg-slate-900 p-5">
+            <section className="mb-8 w-full min-w-0 max-w-full rounded-xl border border-slate-800 bg-slate-900 p-5">
               <h2 className="text-lg font-semibold">
                 Incident Investigation
               </h2>
@@ -654,7 +652,8 @@ export default function Home() {
                 Select an incident to view its details.
               </p>
 
-              <div className="overflow-x-auto">
+              {/* Responsive table wrapper */}
+              <div className="w-full min-w-0 max-w-full overflow-x-auto">
                 <table className="w-full min-w-[750px] text-left text-sm">
                   <thead>
                     <tr className="border-b border-slate-700 text-slate-400">
