@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: downtime-backend
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+
+  - type: web
+    name: downtime-frontend
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./frontend/Dockerfile
+    dockerContext: .

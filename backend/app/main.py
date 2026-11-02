@@ -1,4 +1,5 @@
 
+import os
 from io import StringIO
 
 import pandas as pd
@@ -21,15 +22,22 @@ app = FastAPI(
     version="2.0.0",
 )
 
-# CORS configuration: allow both development and production frontend ports.
+# CORS configuration: allow local development and the deployed frontend.
+allowed_origins = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:3001",
+    "http://127.0.0.1:3001",
+]
+
+frontend_origin = os.getenv("FRONTEND_ORIGIN")
+
+if frontend_origin:
+    allowed_origins.append(frontend_origin.rstrip("/"))
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "http://localhost:3001",
-        "http://127.0.0.1:3001",
-    ],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
