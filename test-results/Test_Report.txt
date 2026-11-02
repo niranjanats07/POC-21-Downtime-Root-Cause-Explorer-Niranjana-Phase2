@@ -1,7 +1,7 @@
 POC 21 — DOWNTIME ROOT CAUSE EXPLORER
 SELENIUM LIVE APPLICATION TEST REPORT
 ==========================================================
-Execution time: 2026-11-02 10:49:52 UTC
+Execution time: 2026-11-02 11:42:34 UTC
 Frontend URL: https://downtime-frontend.onrender.com
 Backend URL: https://downtime-backend.onrender.com
 Deployment platform: Render (not Azure Container Apps)
@@ -20,44 +20,16 @@ PASS: Machine filter and reset interaction
   Machine=MCH-01 reduced list to 3; Reset filters restored 10
 PASS: Intelligence Panel open/close interaction
   Investigate opened incident details and recommendation; Close panel dismissed it
-FAIL: Project information icon and developer signature
-  ElementClickInterceptedException: Message: element click intercepted: Element is not clickable at point (1297, -2462)
-  (Session info: chrome=156.0.8078.79); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#elementclickinterceptedexception
-Stacktrace:
-Symbols not available. Dumping unresolved backtrace:
-	(No symbol) [0x7ff674e1be65]
-	(No symbol) [0x7ff674d235f0]
-	(No symbol) [0x7ff674b926d3]
-	(No symbol) [0x7ff6753a37d2]
-	(No symbol) [0x7ff6753a1df3]
-	(No symbol) [0x7ff67539fd47]
-	(No symbol) [0x7ff67539f4ce]
-	(No symbol) [0x7ff6753940fa]
-	(No symbol) [0x7ff6753b07da]
-	(No symbol) [0x7ff675393b39]
-	(No symbol) [0x7ff675393ad0]
-	(No symbol) [0x7ff674bc6661]
-	(No symbol) [0x7ff674bab969]
-	(No symbol) [0x7ff674bacca3]
-	(No symbol) [0x7ff675295af1]
-	(No symbol) [0x7ff6752b67f7]
-	(No symbol) [0x7ff6752ace20]
-	(No symbol) [0x7ff674f3ff8e]
-	(No symbol) [0x7ff674d32865]
-	(No symbol) [0x7ff674d2d1d4]
-	(No symbol) [0x7ff674d2d364]
-	(No symbol) [0x7ff674d1644c]
-	(No symbol) [0x7ffe32517374]
-	(No symbol) [0x7ffe3315cc91]
-
-FAIL: Responsive layout at mobile width
-  AssertionError: Unexpected page-level horizontal overflow: {'body': 644, 'page': 644, 'viewport': 485}. Elements extending outside viewport: [{'className': 'w-full min-w-[750px] text-left text-sm', 'clientWidth': 750, 'id': '', 'left': 37, 'right': 787, 'scrollWidth': 750, 'tag': 'TABLE', 'width': 750}, {'className': '', 'clientWidth': 750, 'id': '', 'left': 37, 'right': 787, 'scrollWidth': 750, 'tag': 'THEAD', 'width': 750}, {'className': 'border-b border-slate-700 text-slate-400', 'clientWidth': 750, 'id': '', 'left': 37, 'right': 787, 'scrollWidth': 750, 'tag': 'TR', 'width': 750}, {'className': 'p-3', 'clientWidth': 139, 'id': '', 'left': 648, 'right': 787, 'scrollWidth': 139, 'tag': 'TH', 'width': 139}, {'className': '', 'clientWidth': 750, 'id': '', 'left': 37, 'right': 787, 'scrollWidth': 750, 'tag': 'TBODY', 'width': 750}, {'className': 'border-b border-slate-800 hover:bg-slate-800/50', 'clientWidth': 750, 'id': '', 'left': 37, 'right': 787, 'scrollWidth': 750, 'tag': 'TR', 'width': 750}, {'className': 'p-3', 'clientWidth': 139, 'id': '', 'left': 648, 'right': 787, 'scrollWidth': 139, 'tag': 'TD', 'width': 139}, {'className': 'border-b border-slate-800 hover:bg-slate-800/50', 'clientWidth': 750, 'id': '', 'left': 37, 'right': 787, 'scrollWidth': 750, 'tag': 'TR', 'width': 750}, {'className': 'p-3', 'clientWidth': 139, 'id': '', 'left': 648, 'right': 787, 'scrollWidth': 139, 'tag': 'TD', 'width': 139}, {'className': 'border-b border-slate-800 hover:bg-slate-800/50', 'clientWidth': 750, 'id': '', 'left': 37, 'right': 787, 'scrollWidth': 750, 'tag': 'TR', 'width': 750}, {'className': 'p-3', 'clientWidth': 139, 'id': '', 'left': 648, 'right': 787, 'scrollWidth': 139, 'tag': 'TD', 'width': 139}, {'className': 'border-b border-slate-800 hover:bg-slate-800/50', 'clientWidth': 750, 'id': '', 'left': 37, 'right': 787, 'scrollWidth': 750, 'tag': 'TR', 'width': 750}, {'className': 'p-3', 'clientWidth': 139, 'id': '', 'left': 648, 'right': 787, 'scrollWidth': 139, 'tag': 'TD', 'width': 139}, {'className': 'border-b border-slate-800 hover:bg-slate-800/50', 'clientWidth': 750, 'id': '', 'left': 37, 'right': 787, 'scrollWidth': 750, 'tag': 'TR', 'width': 750}, {'className': 'p-3', 'clientWidth': 139, 'id': '', 'left': 648, 'right': 787, 'scrollWidth': 139, 'tag': 'TD', 'width': 139}]
+PASS: Project information icon and developer signature
+  Info icon opened modal with developer name, PoC ID 21 and GitHub username
+PASS: Responsive layout at mobile width
+  Mobile viewport 485px; document width 485px; mobile screenshot saved
 PASS: Desktop screenshot capture
   Saved screenshots/selenium_dashboard.png
 
-Passed: 6
-Failed: 2
-Overall Selenium result: FAIL
+Passed: 8
+Failed: 0
+Overall Selenium result: PASS
 
 Evidence files:
 - screenshots/selenium_dashboard.png

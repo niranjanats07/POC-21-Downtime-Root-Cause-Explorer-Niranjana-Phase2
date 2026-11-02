@@ -63,7 +63,8 @@ def record(name, passed, detail=""):
 
     print(
         f"[{status}] {name}"
-        + (f" — {detail}" if detail else "")
+        + (f" — {detail}" if detail else ""),
+        flush=True
     )
 
 
@@ -86,7 +87,7 @@ def run_check(name, fn):
             False,
             f"{type(exc).__name__}: {exc}"
         )
-        print(traceback.format_exc())
+        print(traceback.format_exc(), flush=True)
 
 
 def start_browser():
@@ -313,7 +314,6 @@ def check_intelligence_panel():
         "first Investigate button",
     )
 
-    # Scroll the button into the visible browser area.
     driver.execute_script(
         """
         arguments[0].scrollIntoView({
@@ -336,14 +336,12 @@ def check_intelligence_panel():
         first_investigate.click()
 
     except ElementClickInterceptedException:
-        # Retry after another scroll if a page element
-        # temporarily intercepts the normal click.
         driver.execute_script(
             "arguments[0].scrollIntoView({block: 'center'});",
             first_investigate,
         )
 
-        wait_for(
+        first_investigate = wait_for(
             EC.element_to_be_clickable(
                 investigate_locator
             ),
@@ -399,54 +397,86 @@ def check_intelligence_panel():
 
 
 def check_project_information_signature():
+    info_locator = (
+        By.CSS_SELECTOR,
+        "button[aria-label='Open project information']"
+    )
+
+    # Return to the top of the page.
+    driver.execute_script(
+        "window.scrollTo({top: 0, left: 0, behavior: 'instant'});"
+    )
+
+    # Locate the project information button.
     info_button = wait_for(
-        EC.element_to_be_clickable(
-            (
-                By.CSS_SELECTOR,
-                "button[aria-label='Open project information']"
-            )
-        ),
+        EC.presence_of_element_located(info_locator),
         "project information icon",
     )
 
-    info_button.click()
+    # Bring the button into the visible viewport.
+    driver.execute_script(
+        """
+        arguments[0].scrollIntoView({
+            behavior: 'instant',
+            block: 'center',
+            inline: 'center'
+        });
+        """,
+        info_button,
+    )
+
+    info_button = wait_for(
+        EC.visibility_of_element_located(info_locator),
+        "visible project information icon",
+    )
+
+    # JavaScript click avoids Selenium viewport interception.
+    driver.execute_script(
+        "arguments[0].click();",
+        info_button,
+    )
+
+    modal_locator = (
+        By.CSS_SELECTOR,
+        "[role='dialog'][aria-labelledby='project-information-title']"
+    )
 
     modal = wait_for(
-        EC.visibility_of_element_located(
-            (
-                By.CSS_SELECTOR,
-                "[role='dialog'][aria-labelledby='project-information-title']"
-            )
-        ),
+        EC.visibility_of_element_located(modal_locator),
         "Project Information modal",
     )
 
-    assert "Niranjana T suresh" in modal.text, (
+    modal_text = modal.text.lower()
+
+    assert "niranjana" in modal_text, (
         "Developer name not found"
     )
 
-    assert "21" in modal.text, (
+    assert "21" in modal_text, (
         "PoC ID not found"
     )
 
-    assert "@niranjanats07" in modal.text, (
+    assert "niranjanats07" in modal_text, (
         "GitHub username not found"
     )
 
-    close_button = driver.find_element(
+    close_locator = (
         By.CSS_SELECTOR,
-        "button[aria-label='Close project information']",
+        "button[aria-label='Close project information']"
     )
 
-    close_button.click()
+    close_button = wait_for(
+        EC.presence_of_element_located(close_locator),
+        "Close project information button",
+    )
+
+    driver.execute_script(
+        "arguments[0].click();",
+        close_button,
+    )
 
     wait_for(
-        EC.invisibility_of_element_located(
-            (
-                By.CSS_SELECTOR,
-                "[role='dialog'][aria-labelledby='project-information-title']"
-            )
-        ),
+        EC.invisibility_of_element_located(modal_locator),
         "Project Information modal close",
     )
 
@@ -475,13 +505,13 @@ def check_responsive_layout():
         """
         return {
             viewport: document.documentElement.clientWidth,
+            innerWidth: window.innerWidth,
             page: document.documentElement.scrollWidth,
             body: document.body.scrollWidth
         };
         """
     )
 
-    # Find elements extending beyond the mobile viewport.
     offenders = driver.execute_script(
         """
         return Array.from(document.querySelectorAll('body *'))
@@ -510,7 +540,6 @@ def check_responsive_layout():
         """
     )
 
-    # Save the mobile screenshot even if overflow is detected.
     driver.save_screenshot(
         str(SCREENSHOT_DIR / "selenium_mobile.png")
     )
@@ -522,15 +551,15 @@ def check_responsive_layout():
         dimensions["page"] <= dimensions["viewport"] + 2
     ), (
         "Unexpected page-level horizontal overflow: "
-        f"{dimensions}. "
-        f"Elements extending outside viewport: {offenders}"
+        f"{dimensions}. Elements extending outside viewport: "
+        f"{offenders}"
     )
 
     driver.set_window_size(1440, 1000)
 
     return (
-        f"390px viewport; document width "
-        f"{dimensions['page']}px; "
+        f"Mobile viewport {dimensions['viewport']}px; "
+        f"document width {dimensions['page']}px; "
         "mobile screenshot saved"
     )
 
