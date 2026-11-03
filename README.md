@@ -4,19 +4,11 @@
 
 An interactive analytics dashboard for exploring machinery downtime, identifying root causes, and analysing machine performance.
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Project-POC--21-blue?style=flat-square" />
-  <img src="https://img.shields.io/badge/Frontend-Next.js-black?style=flat-square" />
-  <img src="https://img.shields.io/badge/Backend-FastAPI-009688?style=flat-square" />
-  <img src="https://img.shields.io/badge/Testing-Selenium-43B02A?style=flat-square" />
-  <img src="https://img.shields.io/badge/Deployment-Render-purple?style=flat-square" />
-</p>
-
 ---
 
 ## 1. Project Overview
 
-Downtime Root Cause Explorer is a web-based analytics application designed to help users examine manufacturing downtime incidents and understand machine performance.
+Downtime Root Cause Explorer is a web-based analytics application designed to help users analyse manufacturing downtime incidents and understand machine performance.
 
 The dashboard combines incident data, key performance indicators, interactive visualisations, and filtering capabilities to provide a centralised view of downtime patterns and potential root causes.
 
@@ -77,13 +69,13 @@ Build and start the application from the project root:
 docker compose up --build -d
 ```
 
-**Application endpoints**
+**Application Endpoints**
 
 | Service | Local URL |
 |---|---|
-| Frontend | http://localhost:3000 |
-| Backend | http://localhost:8000 |
-| Health Check | http://localhost:8000/health |
+| Frontend | [http://localhost:3000](http://localhost:3000) |
+| Backend | [http://localhost:8000](http://localhost:8000) |
+| Health Check | [http://localhost:8000/health](http://localhost:8000/health) |
 
 Check container status:
 
@@ -97,18 +89,18 @@ Stop containers:
 docker compose down
 ```
 
-**Validation:** Local Docker testing covered application startup, API communication, dashboard loading, incident data, filters, charts, exports, and container restart behaviour.
+**Docker Validation:** Local testing covered application startup, API communication, dashboard loading, incident data, filters, charts, exports, and container restart behaviour.
 
 ## 5. Live Deployment — Render
 
-The application was deployed on Render as the coordinator-approved alternative to Azure Container Apps.
+The application is hosted on Render.
 
 ### Application URLs
 
-| Service | Live URL |
+| Service | Link |
 |---|---|
-| Frontend Dashboard | [Open Dashboard](https://downtime-frontend.onrender.com) |
-| Backend API | [Open Backend](https://downtime-backend.onrender.com) |
+| Frontend Dashboard | [Open Dashboard](https://downtime-frontend.onrender.com/) |
+| Backend API | [Open Backend](https://downtime-backend.onrender.com/) |
 | Backend Health Check | [Check Health](https://downtime-backend.onrender.com/health) |
 
 ### Deployment Configuration
@@ -139,9 +131,9 @@ Automated browser testing was performed against the live Render application usin
 
 ### Live URLs Tested
 
-- **Frontend:** https://downtime-frontend.onrender.com
-- **Backend:** https://downtime-backend.onrender.com
-- **Health Endpoint:** https://downtime-backend.onrender.com/health
+- **Frontend:** [https://downtime-frontend.onrender.com](https://downtime-frontend.onrender.com)
+- **Backend:** [https://downtime-backend.onrender.com](https://downtime-backend.onrender.com)
+- **Health Endpoint:** [https://downtime-backend.onrender.com/health](https://downtime-backend.onrender.com/health)
 
 ### Install Dependencies
 
@@ -179,7 +171,7 @@ The Selenium test suite validates:
 
 ### Latest Test Results
 
-<badge color="success">PASS — 8 Passed, 0 Failed</badge>
+**Test Status: PASS — 8 Passed, 0 Failed**
 
 | Metric | Result |
 |---|---|
@@ -196,14 +188,12 @@ The responsive validation confirmed that the document and page widths remained w
 
 ### Test Evidence
 
-| Evidence | Repository Link |
-|---|---|
-| Selenium Test Script | [View Script](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2/blob/main/tests/test_poc.py) |
-| Test Dependencies | [View Requirements](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2/blob/main/requirements-test.txt) |
-| Execution Report | [View Report](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2/blob/main/test-results/Test_Report.txt) |
-| Desktop Screenshot | [View Screenshot](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2/blob/main/screenshots/selenium_dashboard.png) |
-| Mobile Screenshot | [View Screenshot](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2/blob/main/screenshots/selenium_mobile.png) |
-| Detailed Test Report | [View Documentation](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2/blob/main/SELENIUM_TEST_REPORT.md) |
+- [Selenium Test Script](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2/blob/main/tests/test_poc.py)
+- [Test Dependencies](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2/blob/main/requirements-test.txt)
+- [Test Execution Report](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2/blob/main/test-results/Test_Report.txt)
+- [Desktop Screenshot](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2/blob/main/screenshots/selenium_dashboard.png)
+- [Mobile Screenshot](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2/blob/main/screenshots/selenium_mobile.png)
+- [Detailed Selenium Test Report](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2/blob/main/SELENIUM_TEST_REPORT.md)
 
 ## 7. Known Limitations
 
@@ -232,5 +222,5 @@ The responsive validation confirmed that the document and page widths remained w
 <p align="center">
   <strong>POC-21 | Downtime Root Cause Explorer</strong>
   <br/>
-  <sub>Manufacturing Downtime Analytics & Root Cause Exploration</sub>
+  <sub>Manufacturing Downtime Analytics &amp; Root Cause Exploration</sub>
 </p>
