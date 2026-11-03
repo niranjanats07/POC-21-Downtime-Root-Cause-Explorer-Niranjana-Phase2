@@ -14,12 +14,12 @@ The dashboard combines incident records, key performance indicators, interactive
 
 ## Key Features
 
-- **Downtime Analytics** — View incident records and key performance indicators.
-- **Machine Filtering** — Filter incident records by machine.
-- **Interactive Visualisations** — Explore downtime patterns and machine performance through charts.
-- **Root Cause Exploration** — Investigate incident details using the Intelligence Panel.
-- **Data Export** — Export filtered incident data in CSV and JSON formats.
-- **Project Information** — View project and developer details.
+- **Downtime Analytics:** View incident records and key performance indicators.
+- **Machine Filtering:** Filter incident records by machine.
+- **Interactive Visualisations:** Explore downtime patterns and machine performance through charts.
+- **Root Cause Exploration:** Investigate incident details using the Intelligence Panel.
+- **Data Export:** Export filtered incident data in CSV and JSON formats.
+- **Project Information:** View project and developer details.
 
 ## Technology Stack
 
@@ -37,7 +37,7 @@ The dashboard combines incident records, key performance indicators, interactive
 
 ## Project Setup
 
-### Local Development
+### Run Locally
 
 **Backend**
 
@@ -47,7 +47,7 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-**Backend URL:** `http://localhost:8000`
+Backend: `http://localhost:8000`
 
 **Frontend**
 
@@ -59,9 +59,9 @@ npm install
 npm run dev
 ```
 
-**Frontend URL:** `http://localhost:3000`
+Frontend: `http://localhost:3000`
 
-### Docker Deployment
+### Run with Docker
 
 **Prerequisites:** Docker Desktop and Docker Compose.
 
@@ -99,17 +99,7 @@ docker compose down
 
 **Docker Validation**
 
-Local Docker validation covered:
-
-- Backend and frontend container startup.
-- Backend health endpoint.
-- Frontend dashboard loading.
-- Frontend-to-backend API communication.
-- Synthetic incident data loading.
-- Machine filters and visualisations.
-- Intelligence Panel functionality.
-- CSV and JSON exports.
-- Container restart behaviour.
+Local Docker validation covered application startup, API communication, dashboard loading, incident data, machine filters, charts, exports, and container restart behaviour.
 
 ---
 
@@ -138,7 +128,7 @@ The application is hosted on Render using Docker-based deployment.
 
 Frontend and backend deployment, API communication, dashboard data loading, and service restart validation were completed successfully.
 
-### Environment Configuration
+### Environment Variables
 
 **Frontend**
 
@@ -169,6 +159,12 @@ Automated browser testing was performed against the live Render application usin
 | Dependencies | `requirements-test.txt` |
 | Test Target | Live Render deployment |
 
+### Live URLs Tested
+
+- **Frontend:** [downtime-frontend.onrender.com](https://downtime-frontend.onrender.com/)
+- **Backend:** [downtime-backend.onrender.com](https://downtime-backend.onrender.com/)
+- **Health Endpoint:** [Backend Health Check](https://downtime-backend.onrender.com/health)
+
 ### Install Dependencies
 
 Run from the Phase 2 repository root:
@@ -183,7 +179,7 @@ py -m pip install -r requirements-test.txt
 py -u tests/test_poc.py
 ```
 
-**Run Chrome in visible browser mode (PowerShell)**
+**Run Chrome in visible browser mode using PowerShell:**
 
 ```powershell
 $env:HEADLESS="false"
@@ -220,13 +216,13 @@ The Selenium test suite validates:
 
 The responsive validation confirmed that the document and page widths remained within the 390px viewport. Some internal chart and table content may extend beyond the viewport.
 
-### Test Evidence & Reports
+### Test Evidence
 
 - [Selenium Test Script](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2/blob/main/tests/test_poc.py)
 - [Test Dependencies](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2/blob/main/requirements-test.txt)
 - [Test Execution Report](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2/blob/main/test-results/Test_Report.txt)
-- [Desktop Dashboard Screenshot](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2/blob/main/screenshots/selenium_dashboard.png)
-- [Mobile Dashboard Screenshot](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2/blob/main/screenshots/selenium_mobile.png)
+- [Desktop Screenshot](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2/blob/main/screenshots/selenium_dashboard.png)
+- [Mobile Screenshot](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2/blob/main/screenshots/selenium_mobile.png)
 - [Detailed Selenium Test Report](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2/blob/main/SELENIUM_TEST_REPORT.md)
 
 ---
@@ -234,4 +230,29 @@ The responsive validation confirmed that the document and page widths remained w
 ## Known Limitations
 
 - The application currently uses synthetic downtime incident data.
-- Render is used for cloud hosting. Azure Container Apps
+- Render is used for cloud hosting. Azure Container Apps and Azure Container Registry were not used.
+- Selenium validation was performed against the live Render deployment.
+- Some chart and table content may require horizontal scrolling on narrow screens.
+
+## Developer Information
+
+| Detail | Information |
+|:---|:---|
+| Developer | Niranjana T Suresh |
+| PoC ID | 21 |
+| Organisation | Infocreon |
+| Programme | Internship — Phase 2 |
+| Batch | Batch 8 / MA College |
+| GitHub | [@niranjanats07](https://github.com/niranjanats07) |
+
+## Repository
+
+[**POC-21 — Downtime Root Cause Explorer | Phase 2**](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2)
+
+---
+
+<p align="center">
+  <strong>POC-21 | DOWNTIME ROOT CAUSE EXPLORER</strong><br/>
+  <sub>Manufacturing Downtime Analytics &amp; Root Cause Exploration</sub><br/>
+  <sub>Infocreon Internship Programme — Phase 2</sub>
+</p>
