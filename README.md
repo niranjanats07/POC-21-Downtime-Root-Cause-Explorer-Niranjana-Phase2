@@ -1,52 +1,51 @@
-# POC-21: Downtime Root Cause Explorer
+# POC-21 | Downtime Root Cause Explorer
 
 **Infocreon Internship Project — Phase 2**
 
-An interactive dashboard for exploring machinery downtime incidents, identifying root causes, and analysing machine performance.
+An interactive analytics dashboard for exploring machinery downtime, identifying root causes, and analysing machine performance.
 
-## Features
+<p align="center">
+  <img src="https://img.shields.io/badge/Project-POC--21-blue?style=flat-square" />
+  <img src="https://img.shields.io/badge/Frontend-Next.js-black?style=flat-square" />
+  <img src="https://img.shields.io/badge/Backend-FastAPI-009688?style=flat-square" />
+  <img src="https://img.shields.io/badge/Testing-Selenium-43B02A?style=flat-square" />
+  <img src="https://img.shields.io/badge/Deployment-Render-purple?style=flat-square" />
+</p>
 
-- View downtime incidents and key performance indicators.
-- Filter incidents by machine.
-- Explore downtime using interactive charts.
-- Investigate incident details through the Intelligence Panel.
-- Export filtered incident data as CSV or JSON.
-- View project and developer information.
+---
 
-## Technology Stack
+## 1. Project Overview
 
-- **Frontend:** Next.js, React, TypeScript, Tailwind CSS
-- **Backend:** FastAPI, Python, Pandas, DuckDB
-- **Visualisation:** Apache ECharts, Plotly, D3.js
-- **Tables:** TanStack Table
-- **Containerisation:** Docker, Docker Compose
-- **Cloud Deployment:** Render
+Downtime Root Cause Explorer is a web-based analytics application designed to help users examine manufacturing downtime incidents and understand machine performance.
 
-## Project Structure
+The dashboard combines incident data, key performance indicators, interactive visualisations, and filtering capabilities to provide a centralised view of downtime patterns and potential root causes.
 
-```text
-POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2/
-├── backend/
-│   ├── app/
-│   ├── requirements.txt
-│   └── Dockerfile
-├── frontend/
-│   ├── src/
-│   ├── package.json
-│   └── Dockerfile
-├── data/
-│   └── synthetic/
-├── .dockerignore
-├── .env.example
-├── docker-compose.yml
-├── .gitignore
-├── render.yaml
-└── README.md
-```
+## 2. Key Features
 
-## Running Locally Without Docker
+- **Downtime Analytics:** View incidents and key performance indicators.
+- **Machine Filtering:** Filter incident records by machine.
+- **Interactive Visualisations:** Explore downtime patterns through charts.
+- **Root Cause Exploration:** Investigate incidents using the Intelligence Panel.
+- **Data Export:** Export filtered incident data in CSV and JSON formats.
+- **Project Information:** View project and developer details.
 
-### Backend
+## 3. Technology Stack
+
+| Component | Technologies |
+|---|---|
+| Frontend | Next.js, React, TypeScript, Tailwind CSS |
+| Backend | FastAPI, Python, Pandas, DuckDB |
+| Visualisation | Apache ECharts, Plotly, D3.js |
+| Data Tables | TanStack Table |
+| Containerisation | Docker, Docker Compose |
+| Cloud Deployment | Render |
+| Automated Testing | Selenium WebDriver 4, Python, Google Chrome |
+
+## 4. Project Setup
+
+### Run Locally
+
+**Backend**
 
 ```bash
 cd backend
@@ -54,9 +53,11 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-Backend: http://localhost:8000
+Backend: `http://localhost:8000`
 
-### Frontend
+**Frontend**
+
+Open a separate terminal:
 
 ```bash
 cd frontend
@@ -64,209 +65,172 @@ npm install
 npm run dev
 ```
 
-Frontend: http://localhost:3000
+Frontend: `http://localhost:3000`
 
-## Running with Docker
+### Run with Docker
 
-### Prerequisites
+**Prerequisites:** Docker Desktop and Docker Compose.
 
-- Docker Desktop installed and running.
-- Docker Compose available.
-
-### Environment Configuration
-
-The project includes an `.env.example` template containing the frontend and backend port and API URL settings.
-
-The current Compose configuration publishes the backend on port `8000` and frontend on port `3000`.
-
-### Build and Start Containers
-
-Run these commands from the Phase 2 project root:
+Build and start the application from the project root:
 
 ```bash
 docker compose up --build -d
 ```
 
-### Check Container Status
+**Application endpoints**
+
+| Service | Local URL |
+|---|---|
+| Frontend | http://localhost:3000 |
+| Backend | http://localhost:8000 |
+| Health Check | http://localhost:8000/health |
+
+Check container status:
 
 ```bash
 docker compose ps
 ```
 
-### Access the Application
-
-- **Frontend dashboard:** http://localhost:3000
-- **Backend API:** http://localhost:8000
-- **Backend health check:** http://localhost:8000/health
-- **Dashboard KPI endpoint:** http://localhost:8000/api/dashboard/kpis
-
-### Stop Containers
+Stop containers:
 
 ```bash
 docker compose down
 ```
 
-### Restart Containers
+**Validation:** Local Docker testing covered application startup, API communication, dashboard loading, incident data, filters, charts, exports, and container restart behaviour.
 
-```bash
-docker compose restart
-```
+## 5. Live Deployment — Render
 
-### View Container Logs
+The application was deployed on Render as the coordinator-approved alternative to Azure Container Apps.
 
-```bash
-docker compose logs
-```
+### Application URLs
 
-For backend-only logs:
-
-```bash
-docker compose logs backend
-```
-
-For frontend-only logs:
-
-```bash
-docker compose logs frontend
-```
-
-## Docker Validation Results
-
-The following checks were completed in the local Docker environment:
-
-| Validation | Result |
+| Service | Live URL |
 |---|---|
-| Backend container startup | Passed |
-| Frontend container startup | Passed |
-| Backend health endpoint | Passed |
-| Frontend dashboard loading | Passed |
-| Frontend-to-backend communication | Passed |
-| Synthetic incident data loading | Passed |
-| Machine filters | Passed |
-| Charts and visualisations | Passed |
-| Intelligence Panel | Passed |
-| CSV and JSON exports | Passed |
-| Container restart validation | Passed |
-
-Both containers were confirmed running, with the frontend exposed on port `3000` and backend on port `8000`.
-
-## Render Cloud Deployment
-
-The Phase 2 application was deployed successfully using Render as the coordinator-approved alternative to Azure Container Apps.
-
-### Live Application
-
-- **Frontend Dashboard:** https://downtime-frontend.onrender.com
-- **Backend API:** https://downtime-backend.onrender.com
-- **Backend Health Check:** https://downtime-backend.onrender.com/health
+| Frontend Dashboard | [Open Dashboard](https://downtime-frontend.onrender.com) |
+| Backend API | [Open Backend](https://downtime-backend.onrender.com) |
+| Backend Health Check | [Check Health](https://downtime-backend.onrender.com/health) |
 
 ### Deployment Configuration
 
-| Component | Configuration |
+| Setting | Configuration |
 |---|---|
-| Frontend | Render Web Service |
-| Backend | Render Web Service |
+| Platform | Render |
 | Deployment Method | Docker |
-| Git Branch | main |
+| Git Branch | `main` |
 | Region | Singapore |
-| Frontend Health Check | `/` |
-| Backend Health Check | `/health` |
 
-### Environment Configuration
+Frontend and backend deployment, API communication, dashboard data loading, and service restart validation were completed successfully.
 
-Frontend Render environment variable:
+## 6. Selenium End-to-End Testing
 
-```env
-NEXT_PUBLIC_API_URL=https://downtime-backend.onrender.com
-```
+Automated browser testing was performed against the live Render application using Selenium WebDriver 4, Python, and Google Chrome.
 
-Backend Render environment variable:
+### Test Environment
 
-```env
-FRONTEND_ORIGIN=https://downtime-frontend.onrender.com
-```
-
-### Cloud Validation Results
-
-| Validation | Result |
+| Configuration | Details |
 |---|---|
-| Frontend deployment | Passed |
-| Backend deployment | Passed |
-| Backend health check | Passed |
-| Frontend-to-backend communication | Passed |
-| Dashboard data loading | Passed |
-| Machine filters and visualisations | Passed |
-| Incident data display | Passed |
-| Frontend restart validation | Passed |
-| Backend restart validation | Passed |
-| Dashboard revalidation after restart | Passed |
+| Framework | Selenium WebDriver 4 |
+| Language | Python |
+| Browser | Google Chrome |
+| Test Script | `tests/test_poc.py` |
+| Dependencies | `requirements-test.txt` |
+| Test Target | Live Render deployment |
 
-The dashboard was rechecked after restarting both Render services. Incident data, KPI cards, machine breakdowns, charts, and visualisations loaded successfully.
+### Live URLs Tested
 
-### Cloud Deployment Note
+- **Frontend:** https://downtime-frontend.onrender.com
+- **Backend:** https://downtime-backend.onrender.com
+- **Health Endpoint:** https://downtime-backend.onrender.com/health
 
-Render was used as the coordinator-approved alternative for the cloud deployment requirement.
+### Install Dependencies
 
-- **Azure Container Apps:** Not used.
-- **Azure Container Registry:** Not used.
-- **Cloud Hosting Platform:** Render.
-- **Render Region:** Singapore.
-
-## Troubleshooting
-
-### Docker Desktop is not running
-
-Start Docker Desktop and wait until its engine is ready.
-
-### Port already in use
-
-Check whether another application is using ports `3000` or `8000`. Stop the conflicting application before starting the containers.
-
-### Frontend or backend container is not running
-
-Check the logs:
+Run from the Phase 2 repository root:
 
 ```bash
-docker compose logs
+py -m pip install -r requirements-test.txt
 ```
 
-Rebuild and restart:
+### Execute Tests
 
 ```bash
-docker compose down
-docker compose up --build -d
+py -u tests/test_poc.py
 ```
 
-### Cloud dashboard cannot load backend data
+To run Chrome in visible browser mode using PowerShell:
 
-Check that:
+```powershell
+$env:HEADLESS="false"
+py -u tests/test_poc.py
+```
 
-- The backend Render service is live.
-- The backend health endpoint returns a healthy response.
-- The frontend has the correct `NEXT_PUBLIC_API_URL`.
-- The backend has the correct `FRONTEND_ORIGIN`.
+### Automated Test Coverage
 
-## Known Limitations
+The Selenium test suite validates:
 
-- The project uses synthetic downtime incident data.
-- Render was used as the coordinator-approved alternative to Azure Container Apps.
-- Azure Container Apps and Azure Container Registry were not used.
-- The application was validated through local Docker deployment and the live Render deployment.
-- Selenium validation has not been performed.
+1. Live application page loading.
+2. Incident data retrieval and chart rendering.
+3. Frontend-to-backend API communication.
+4. Machine filtering and reset functionality.
+5. Intelligence Panel interaction.
+6. Project information and developer signature.
+7. Responsive page-width validation at a 390px viewport.
+8. Desktop and mobile screenshot capture.
 
-## Developer Details
+### Latest Test Results
 
-- **Developed by:** Niranjana T Suresh
-- **PoC ID:** 21
-- **GitHub:** [niranjanats07](https://github.com/niranjanats07)
-- **Batch:** Batch 8 / MA College
-- **Organisation:** Infocreon Internship
+<badge color="success">PASS — 8 Passed, 0 Failed</badge>
 
-## Phase 2 Repository
+| Metric | Result |
+|---|---|
+| Execution Date | 03 November 2026 |
+| Execution Time | 05:37:43 UTC |
+| Browser | Google Chrome |
+| Tests Passed | 8 |
+| Tests Failed | 0 |
+| Backend API Status | HTTP 200 |
+| Incident Records Retrieved | 10 |
+| Mobile Viewport | 390px |
 
-[POC-21 Downtime Root Cause Explorer — Phase 2](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2)
+The responsive validation confirmed that the document and page widths remained within the 390px viewport. Some internal chart and table content may extend beyond the viewport.
+
+### Test Evidence
+
+| Evidence | Repository Link |
+|---|---|
+| Selenium Test Script | [View Script](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2/blob/main/tests/test_poc.py) |
+| Test Dependencies | [View Requirements](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2/blob/main/requirements-test.txt) |
+| Execution Report | [View Report](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2/blob/main/test-results/Test_Report.txt) |
+| Desktop Screenshot | [View Screenshot](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2/blob/main/screenshots/selenium_dashboard.png) |
+| Mobile Screenshot | [View Screenshot](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2/blob/main/screenshots/selenium_mobile.png) |
+| Detailed Test Report | [View Documentation](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2/blob/main/SELENIUM_TEST_REPORT.md) |
+
+## 7. Known Limitations
+
+- The application currently uses synthetic downtime incident data.
+- Render was used for cloud hosting; Azure Container Apps and Azure Container Registry were not used.
+- Selenium validation was performed against the Render deployment only.
+- Some chart and table content may require horizontal scrolling on narrow screens.
+
+## 8. Developer Information
+
+| Detail | Information |
+|---|---|
+| Developer | Niranjana T Suresh |
+| PoC ID | 21 |
+| Organisation | Infocreon |
+| Programme | Internship — Phase 2 |
+| Batch | Batch 8 / MA College |
+| GitHub | [@niranjanats07](https://github.com/niranjanats07) |
+
+## 9. Repository
+
+[**POC-21 — Downtime Root Cause Explorer | Phase 2**](https://github.com/niranjanats07/POC-21-Downtime-Root-Cause-Explorer-Niranjana-Phase2)
 
 ---
 
-
-*Downtime Root Cause Explorer — Machinery & Asset Utilization*
+<p align="center">
+  <strong>POC-21 | Downtime Root Cause Explorer</strong>
+  <br/>
+  <sub>Manufacturing Downtime Analytics & Root Cause Exploration</sub>
+</p>
