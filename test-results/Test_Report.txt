@@ -1,7 +1,7 @@
 POC 21 — DOWNTIME ROOT CAUSE EXPLORER
 SELENIUM LIVE APPLICATION TEST REPORT
 ==========================================================
-Execution time: 2026-11-02 11:42:34 UTC
+Execution time: 2026-11-03 05:40:28 UTC
 Frontend URL: https://downtime-frontend.onrender.com
 Backend URL: https://downtime-backend.onrender.com
 Deployment platform: Render (not Azure Container Apps)
@@ -23,7 +23,7 @@ PASS: Intelligence Panel open/close interaction
 PASS: Project information icon and developer signature
   Info icon opened modal with developer name, PoC ID 21 and GitHub username
 PASS: Responsive layout at mobile width
-  Mobile viewport 485px; document width 485px; mobile screenshot saved
+  390px mobile viewport; document width 390px; mobile screenshot saved
 PASS: Desktop screenshot capture
   Saved screenshots/selenium_dashboard.png
 

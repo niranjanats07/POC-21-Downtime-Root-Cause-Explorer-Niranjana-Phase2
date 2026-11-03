@@ -1,4 +1,3 @@
-
 """
 PoC 21 - Downtime Root Cause Explorer
 Selenium end-to-end tests for the deployed Render application.
@@ -64,7 +63,7 @@ def record(name, passed, detail=""):
     print(
         f"[{status}] {name}"
         + (f" — {detail}" if detail else ""),
-        flush=True
+        flush=True,
     )
 
 
@@ -487,81 +486,98 @@ def check_project_information_signature():
 
 
 def check_responsive_layout():
-    driver.set_window_size(390, 844)
-
-    wait_for(
-        EC.visibility_of_element_located(
-            (
-                By.XPATH,
-                "//h1[contains(., 'Downtime Root Cause Explorer')]"
-            )
-        ),
-        "mobile dashboard heading",
+    # Emulate a genuine 390 x 844 CSS-pixel mobile viewport.
+    driver.execute_cdp_cmd(
+        "Emulation.setDeviceMetricsOverride",
+        {
+            "width": 390,
+            "height": 844,
+            "deviceScaleFactor": 1,
+            "mobile": True,
+        },
     )
 
-    driver.execute_script("window.scrollTo(0, 0)")
+    try:
+        wait_for(
+            EC.visibility_of_element_located(
+                (
+                    By.XPATH,
+                    "//h1[contains(., 'Downtime Root Cause Explorer')]"
+                )
+            ),
+            "mobile dashboard heading",
+        )
 
-    dimensions = driver.execute_script(
-        """
-        return {
-            viewport: document.documentElement.clientWidth,
-            innerWidth: window.innerWidth,
-            page: document.documentElement.scrollWidth,
-            body: document.body.scrollWidth
-        };
-        """
-    )
+        driver.execute_script("window.scrollTo(0, 0)")
 
-    offenders = driver.execute_script(
-        """
-        return Array.from(document.querySelectorAll('body *'))
-          .map(el => {
-            const r = el.getBoundingClientRect();
-
+        dimensions = driver.execute_script("""
             return {
-              tag: el.tagName,
-              id: el.id,
-              className: typeof el.className === 'string'
-                ? el.className
-                : '',
-              left: Math.round(r.left),
-              right: Math.round(r.right),
-              width: Math.round(r.width),
-              scrollWidth: el.scrollWidth,
-              clientWidth: el.clientWidth
+                viewport: window.innerWidth,
+                document: document.documentElement.clientWidth,
+                page: document.documentElement.scrollWidth,
+                body: document.body.scrollWidth
             };
-          })
-          .filter(el =>
-            el.right > window.innerWidth + 2 ||
-            el.left < -2
-          )
-          .sort((a, b) => b.right - a.right)
-          .slice(0, 15);
-        """
-    )
+        """)
 
-    driver.save_screenshot(
-        str(SCREENSHOT_DIR / "selenium_mobile.png")
-    )
+        offenders = driver.execute_script("""
+            return Array.from(document.querySelectorAll('body *'))
+              .map(el => {
+                const r = el.getBoundingClientRect();
+                return {
+                  tag: el.tagName,
+                  id: el.id,
+                  className: typeof el.className === 'string'
+                    ? el.className : '',
+                  left: Math.round(r.left),
+                  right: Math.round(r.right),
+                  width: Math.round(r.width)
+                };
+              })
+              .filter(el =>
+                el.right > 392 || el.left < -2
+              )
+              .sort((a, b) => b.right - a.right)
+              .slice(0, 15);
+        """)
 
-    print("MOBILE DIMENSIONS:", dimensions)
-    print("MOBILE OVERFLOW ELEMENTS:", offenders)
+        driver.save_screenshot(
+            str(SCREENSHOT_DIR / "selenium_mobile.png")
+        )
 
-    assert (
-        dimensions["page"] <= dimensions["viewport"] + 2
-    ), (
-        "Unexpected page-level horizontal overflow: "
-        f"{dimensions}. Elements extending outside viewport: "
-        f"{offenders}"
-    )
+        print("MOBILE DIMENSIONS:", dimensions)
+        print("MOBILE OVERFLOW ELEMENTS:", offenders)
 
-    driver.set_window_size(1440, 1000)
+        assert dimensions["viewport"] == 390, (
+            f"Expected 390px mobile viewport: {dimensions}"
+        )
 
-    return (
-        f"Mobile viewport {dimensions['viewport']}px; "
-        f"document width {dimensions['page']}px; "
-        "mobile screenshot saved"
-    )
+        assert dimensions["document"] <= 392, (
+            f"Document exceeds mobile viewport: {dimensions}"
+        )
+
+        assert dimensions["page"] <= 392, (
+            f"Page has horizontal overflow: {dimensions}; "
+            f"Elements: {offenders}"
+        )
+
+        assert dimensions["body"] <= 392, (
+            f"Body has horizontal overflow: {dimensions}; "
+            f"Elements: {offenders}"
+        )
+
+        return (
+            f"390px mobile viewport; "
+            f"document width {dimensions['page']}px; "
+            "mobile screenshot saved"
+        )
+
+    finally:
+        # Restore normal desktop browser metrics.
+        driver.execute_cdp_cmd(
+            "Emulation.clearDeviceMetricsOverride",
+            {},
+        )
+        driver.set_window_size(1440, 1000)
 
 
 def save_desktop_screenshot():
